@@ -1,52 +1,44 @@
 import { GetStaticProps } from "next";
 import Footer from "../components/footer";
 import { getAllPostsForHome } from "../Prismic/API";
-import Link from 'next/link';
+import Link from "next/link";
+import styled from "styled-components";
 
-const Home = ({posts}: any) => {
+export default function Home ({ posts }: any){
   return (
     <>
-   
-      <h1>GraphQL Prismic BLOG w/ typescript</h1>     
-
-
-      {posts.map((e: any) => {
-       return(
-         <>
-        <h1>
-         <Link href={`/${e.node._meta.id}`}>
-          {e.node.title[0].text}
-
-
-          </Link>
-  
-        
-        </h1>
-        <img src={e.node.image.url} alt=""/>
-        <p>{e.node.content[0].text}</p>
-        </>
-       )
-      })}
-
-
-
+      <h1>Web Development Notes...</h1>
+      <Main>
+        {posts.map((e: any) => {
+          return (
+            <Post>
+              <img src={e.node.image.url} alt="" />
+              <h2>
+                <Link href={`/${e.node._meta.id}`}>{e.node.title[0].text}</Link>
+              </h2>
+            </Post>
+          );
+        })}
+      </Main>
       <Footer />
     </>
   );
 };
 
-
-
-
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = await getAllPostsForHome(); 
+  const posts = await getAllPostsForHome();
   return {
-    props: { posts }
+    props: { posts },
   };
 };
 
 
+const Main = styled.main`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+`;
 
-
-
-export default Home;
+const Post = styled.section`
+  margin: 25px;
+`;
