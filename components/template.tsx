@@ -14,7 +14,6 @@ export default function Template(props) {
             <Button
               content="Back to posts"
               color="black"
-              background="white"
               link="/" ></Button>
               </LinkWrap>
 

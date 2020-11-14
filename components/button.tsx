@@ -5,7 +5,6 @@ import Link from "next/link";
 
 interface Props {
   color: string;
-  background: string;
   content: string;
   link?: any;
 }
@@ -15,7 +14,7 @@ export default function Button(props: Props) {
     <Link href={props.link}> 
     <TheButton
       color={props.color}
-      background={props.background}>
+      >
       {props.content}
 
       <Arrow width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
@@ -38,7 +37,7 @@ const TheButton = styled.button`
   cursor: pointer;
   opacity: 1;
   text-align: center;
-  background-color: ${(props) => props.background};
+  background-color: white;
   transition: 150ms cubic-bezier(0.215, 0.61, 0.355, 1);
   &:hover {
     opacity: 0.6;
