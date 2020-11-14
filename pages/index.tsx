@@ -3,27 +3,15 @@ import Footer from "../components/footer";
 import { getAllPostsForHome } from "../Prismic/API";
 import Link from "next/link";
 import styled from "styled-components";
+import Template from "../components/template";
 
-export default function Home ({ posts }: any){
+export default function Home({ posts }: any) {
   return (
-    <>
-      <h1>Web Development Notes...</h1>
-      <Main>
-        {posts.map((e: any) => {
-          return (
-            <Post>
-              <img src={e.node.image.url} alt="" />
-              <h2>
-                <Link href={`/${e.node._meta.id}`}>{e.node.title[0].text}</Link>
-              </h2>
-            </Post>
-          );
-        })}
-      </Main>
-      <Footer />
-    </>
+      <Template 
+        title="Prismic Headless CMS"
+        posts={posts} />
   );
-};
+}
 
 export const getStaticProps: GetStaticProps = async () => {
   const posts = await getAllPostsForHome();
@@ -31,14 +19,3 @@ export const getStaticProps: GetStaticProps = async () => {
     props: { posts },
   };
 };
-
-
-const Main = styled.main`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-`;
-
-const Post = styled.section`
-  margin: 25px;
-`;
