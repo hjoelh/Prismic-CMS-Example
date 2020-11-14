@@ -1,8 +1,6 @@
 import { GetStaticProps } from "next";
-import Footer from "../components/footer";
 import { getAllPostsForHome } from "../Prismic/API";
-import Link from "next/link";
-import styled from "styled-components";
+
 import Template from "../components/template";
 
 export default function Home({ posts }: any) {
