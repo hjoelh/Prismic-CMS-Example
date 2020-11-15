@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Footer from "../components/footer";
 import Button from "./button";
 import Link from "next/link";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function Template(props) {
   return (
@@ -9,13 +10,9 @@ export default function Template(props) {
       {props.post ? ( // conditional render for Home or Post
         // POST
         <>
-
-            <LinkWrap>
-            <Button
-              content="Back to posts"
-              color="black"
-              link="/" ></Button>
-              </LinkWrap>
+          <LinkWrap>
+            <Button content="Back to posts" color="black" link="/"></Button>
+          </LinkWrap>
 
           <ImgWrap>
             <ImgPost src={props.post.image.postHeader.url} alt="" />
@@ -24,10 +21,10 @@ export default function Template(props) {
           <h1>{props.post.title[0].text}</h1>
           <PostWrap>
             {props.post.content.map((e) => {
-              return <p>{e.text}</p>;
-            })}
+              return (
+              <p key={uuidv4()}>{e.text}</p>
+            )})}
           </PostWrap>
-
         </>
       ) : (
         // HOME
@@ -35,7 +32,7 @@ export default function Template(props) {
           <h1>{props.title}</h1>
           {props.posts.map((e: any) => {
             return (
-              <Post>
+              <Post key={e.node._meta.uid}>
                 <Img src={e.node.image.url} alt="" />
                 <h2>
                   <Link href={`/${e.node._meta.uid}`}>
@@ -103,4 +100,4 @@ const LinkWrap = styled.div`
   width: 100%;
   background: white;
   padding: 2px 0;
-`
+`;

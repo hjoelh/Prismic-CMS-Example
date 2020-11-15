@@ -66,7 +66,6 @@ export const getPostByID = async (uid) => {
   }
 }
 `);
-
   const document = data.allPosts.edges[0].node;
   return document;
 };
