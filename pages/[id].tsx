@@ -1,13 +1,14 @@
-import { GetStaticProps, GetStaticPaths } from "next";
+import { GetStaticPaths } from "next";
 import { getAllPostIDs, getPostByID } from "../Prismic/API";
-import Template from "../components/template";
+import Template from "../components/post";
 
-export default function Post({ post }) {
+export default function Post({ post }:any) {
   return <Template post={post} />;
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const post = await getPostByID(context.params.id);
+export const getStaticProps = async ({params}: any) => {
+  const id: string = params.id
+  const post = await getPostByID(id);
   return {
     props: { post },
   };
@@ -16,7 +17,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await getAllPostIDs();
   return {
-    paths: paths.map((e) => `/${e.node._meta.uid}`),
+    paths: paths.map((e: any) => `/${e.node._meta.uid}`),
     fallback: false,
   };
 };
+

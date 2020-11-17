@@ -1,7 +1,5 @@
 import { PrismicLink } from "apollo-link-prismic";
-import { InMemoryCache } from "apollo-cache-inmemory";
-import ApolloClient from "apollo-client";
-import gql from "graphql-tag";
+import { ApolloClient, gql, InMemoryCache } from "@apollo/client";
 
 const client = new ApolloClient({
   link: PrismicLink({
@@ -11,9 +9,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-// https://hjoelh-blog.prismic.io/graphql?access_token=MTYwNTI3MTQ4NDAwNi5YNjJsWGhNQUFDSUFETDJS.YVtKdUpQM--_ve-_vS0Z77-977-977-977-977-9IhQm77-977-9A--_vVnvv73vv70L77-9IUlf77-9&state=Tzjvv713FhoF77-9f--_vUMO77-977-9aDo
-
-const fetchData = async (query: any) => {
+const fetchData = async (query: string) => {
   const fullQuery = {
     query: gql`
       ${query}
@@ -49,7 +45,7 @@ export const getAllPostsForHome = async () => {
   return data.allPosts.edges;
 };
 
-export const getPostByID = async (uid) => {
+export const getPostByID = async (uid: string) => {
   const data = await fetchData(`
  {
   allPosts(uid:"${uid}"){

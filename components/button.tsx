@@ -2,34 +2,30 @@ import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
 
-
-interface Props {
+type Props = {
   color: string;
   content: string;
-  link?: any;
-}
+  link: string;
+};
 
-export default function Button(props: Props) {
+export default function Button({ color, content, link }: Props) {
   return (
-    <Link href={props.link}> 
-    <TheButton
-      color={props.color}
-      >
-      {props.content}
-
-      <Arrow width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
-        <path d="M0 5h7"></path>
-        <path d="M1 1l4 4-4 4"></path>
-      </Arrow>
-
-
-    </TheButton>
+    <Link href={link}>
+      <TheButton color={color}>
+        {content}
+        <Arrow width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+          <path d="M0 5h7"></path>
+          <path d="M1 1l4 4-4 4"></path>
+        </Arrow>
+      </TheButton>
     </Link>
   );
 }
 
-const TheButton = styled.button`
-  color: ${(props) => props.color};
+//styles
+
+const TheButton = styled.button<{ color: string }>`
+  color: ${({ color }) => color};
   border: none;
   border-radius: 25px;
   padding: 8px 14px;
