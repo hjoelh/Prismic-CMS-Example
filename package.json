@@ -5,8 +5,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "type-check": "tsc",
-    "apollo-generate": "apollo client:codegen --target typescript --excludes=node_modules/* --includes=**/*.tsx --endpoint=https://hjoelh-blog.prismic.io/graphql --key=\"MTYwNTYzNzQzNDg1MC5YNjJsWGhNQUFDSUFETDJS.bF4KHgPvv73vv70Jf1nvv71hAu-_ve-_ve-_vR7vv73vv73vv73vv73vv712Ge-_vT0Y77-9EGwz77-9\" --tagName=gql --outputFlat src/generated"
+    "type-check": "tsc"
   },
   "dependencies": {
     "@apollo/client": "^3.2.7",
@@ -18,15 +17,13 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-icons": "^3.11.0",
-    "styled-components": "^5.2.1",
-    "uuid": "^8.3.1"
+    "styled-components": "^5.2.1"
   },
   "devDependencies": {
     "@types/node": "^12.12.21",
     "@types/react": "^16.9.16",
     "@types/react-dom": "^16.9.4",
     "@types/styled-components": "^5.1.4",
-    "@types/uuid": "^8.3.0",
     "babel-plugin-styled-components": "^1.11.1",
     "typescript": "4.0"
   },

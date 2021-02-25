@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import Button from "./button";
-import { v4 as uuidv4 } from "uuid";
 import Footer from "./footer";
 
-export default function Template(props: any) {
+export default function Template({ post }: any) {
   return (
     <>
       <LinkWrap>
@@ -11,14 +10,14 @@ export default function Template(props: any) {
       </LinkWrap>
 
       <ImgWrap>
-        <ImgPost src={props.post.image.postHeader.url} alt="" />
+        <ImgPost src={post.image.postHeader.url} alt="" />
       </ImgWrap>
 
-      <h1>{props.post.title[0].text}</h1>
+      <h1>{post.title[0].text}</h1>
 
       <PostWrap>
-        {props.post.content.map((e: any) => {
-          return <p key={uuidv4()}>{e.text}</p>;
+        {post.content.map((e: any, index: number) => {
+          return <p key={index}>{e.text}</p>;
         })}
       </PostWrap>
       <Footer />

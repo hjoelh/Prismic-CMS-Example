@@ -1,24 +1,48 @@
 import { GetStaticPaths } from "next";
-import { getAllPostIDs, getPostByID } from "../Prismic/API";
+import { fetchData } from "../Prismic/API";
 import Template from "../components/post";
 
-export default function Post({ post }:any) {
+export default function Post({ post }: any) {
   return <Template post={post} />;
 }
 
-export const getStaticProps = async ({params}: any) => {
-  const id: string = params.id
-  const post = await getPostByID(id);
+export const getStaticProps = async ({ params }: any) => {
+  const data = await fetchData(`
+  {
+   allPosts(uid:"${params.id}"){
+     edges{
+       node{
+         title
+         image
+         content
+         _meta {
+           uid
+         }
+       }
+     }
+   }
+ }`);
   return {
-    props: { post },
+    props: { post: data.allPosts.edges[0].node },
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await getAllPostIDs();
+  const paths = await fetchData(`
+  query{
+    allPosts{
+      edges{
+        node{
+          _meta {
+            uid
+          }
+        }
+      }
+    }
+  }
+ `);
   return {
-    paths: paths.map((e: any) => `/${e.node._meta.uid}`),
+    paths: paths.allPosts.edges.map((e: any) => `/${e.node._meta.uid}`),
     fallback: false,
   };
 };
-
